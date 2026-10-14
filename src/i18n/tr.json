@@ -4,7 +4,7 @@
         "MetaData": {
             "Title": {
                 "/tr/giris": "Merhabaaa",
-                "/tr/projects": "Projelerim",
+                "/tr/projeler": "Projelerim",
                 "/tr/iletisim": "İletişim - gizemcebi.com"
             }
         },
@@ -16,6 +16,20 @@
             "Information": "Merhaba, ben Gizem ve bu internet sitesi yayınladığım ilk internet sitesi oldu. Bundan dolayı biraz heycanlıyım :) ",
             "Summary": "Üniversite son sınıf öğrencisiyim ve bir start-up'ta back end developer görevi üstlenmekteyim. Boş zamanlarımı ispanyolca ve kodlama öğrenerek geçiriyorum."
         },
+        "Projects": {
+            "Title": "Projelerim",
+            "ViewOnGithub": "GitHub'da görüntüle",
+            "Items": {
+                "Website": {
+                    "Title": "Kişisel Web Sitesi",
+                    "Description": "Şu an incelediğiniz bu CV sitesi: React, TypeScript ve Chakra UI ile geliştirdiğim, Türkçe/İngilizce iki dilli kişisel web sitem."
+                },
+                "PokemonGame": {
+                    "Title": "Pokemon Game",
+                    "Description": "JavaScript ile yazdığım, oyun geliştirmeye ilk adımım olan bir Pokémon oyunu."
+                }
+            }
+        },
         "Contact": {
             "Title": "İletişim",
             "Message": "Benimle iletişime geçmek isterseniz aşağıdaki formu doldurabilirsiniz. En kısa sürede dönüş yapmaya çalışacağım :)",
@@ -26,10 +40,19 @@
             "MailMessage": "Mesaj",
             "PositionTitle": "Yazılım Mühendisi",
             "EmailAddress": "gizem.cebi@hotmail.com",
-            "Info": "İletişim adreslerim:"
+            "Info": "İletişim adreslerim:",
+            "SendSuccess": "Mesajınız gönderildi, teşekkürler!",
+            "SendError": "Bir şeyler ters gitti, lütfen tekrar deneyin."
+        },
+        "NotFound": {
+            "Title": "404",
+            "Message": "Aradığınız sayfa bulunamadı.",
+            "BackHome": "Ana sayfaya dön"
         },
         "Cookies": {
-            "info": "Cookie ayarları sonra eklenecektir. :/"
+            "Message": "Bu site, ziyaretçi istatistiklerini anlamak için Google Analytics kullanıyor. Kabul ediyor musunuz?",
+            "Accept": "Kabul Et",
+            "Reject": "Reddet"
         }
     }
 }

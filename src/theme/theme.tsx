@@ -1,16 +1,18 @@
-import { theme, Theme } from "@chakra-ui/react";
-import React from "react";
+import { extendTheme } from "@chakra-ui/react";
 
-export default {
-    ...theme,
+export default extendTheme({
     fonts: {
-        body: "'Rubik', sans-serif;",
-        heading: "'Rubik', sans-serif;",
-        mono: "'Rubik', sans-serif;",
+        body: "'Rubik', sans-serif",
+        heading: "'Rubik', sans-serif",
+        mono: "'Source Code Pro', monospace",
     },
     colors: {
-        ...theme.colors,
         black: "#1b1b1b",
+        brand: {
+            cream: "#FAF7F0",
+            lavender: "#CBC3E3",
+            ink: "#1b1b1b",
+        },
         red: {
             100: "#ffa2a2",
             200: "#ffa2a2",
@@ -22,4 +24,4 @@ export default {
             800: "#ff0808",
         },
     },
-} as Theme;
+});

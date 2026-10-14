@@ -1,15 +1,18 @@
 import {
     Box, Button,
-    Flex, FormControl, FormLabel,
-    Input, VStack, Text, Textarea
+    Flex, FormControl, FormLabel, Heading,
+    Input, VStack, Textarea, useToast
 } from "@chakra-ui/react";
 import React from 'react'
 import {Formik, Field, getIn} from "formik";
 import * as Yup from 'yup';
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import { send } from 'emailjs-com';
+import {Card} from "../../atoms/Card";
 
 export default function ContactForm() {
+    const {t} = useTranslation();
+    const toast = useToast();
 
     const SignupSchema = Yup.object().shape({
         firstName: Yup.string()
@@ -35,82 +38,50 @@ export default function ContactForm() {
     }
 
     return (
-        <>
-            <Box
-                width="100%"
-                height={"30em"}
-                position={"relative"}>
-            <Flex>
-                <Text
-                    fontSize="2xl"
-                    fontWeight="800"
-                    mt="20"
-                    w="100%"
-                    lineHeight="1"
-                    fontFamily={"Source Code Pro"}
-                    position={"absolute"}
-                    zIndex={1}
-                    paddingBottom={"20px"}
-                    paddingLeft={"10px"}>
-                    <Trans i18nKey="Contact.Message" />
-                </Text>
-            </Flex>
-            <Flex
-                w={"100%"}
-                justifyContent={"center"}
-                height={"32em"}
-                alignItems={"flex-end"}
-                paddingBottom={"30px"}
-                position={"absolute"}
-                bg={"#FAF7F0"}
-                borderRadius={"25px"}
-                boxShadow={"0 0 5px 5px #CBC3E3"}
-            >
-            <Formik
-                initialValues={{
-                    email: "",
-                    firstName: "",
-                    lastName: "",
-                    message: "",
-                }}
-                validationSchema={SignupSchema}
-                onSubmit={(values) => {
-                    send(
-                        'service_mpdk7b4',
-                        'template_09omxjv',
-                        values,
-                        'dbF9XEig3xE9x2TuG'
-                    )
-                        .then((response) => {
-                            // TODO: bak alert ekle
-                            console.log('SUCCESS!', response.status, response.text);
-                        })
-                        .catch((err) => {
-                            console.log('FAILED...', err);
-                        });
-                }}
-            >
+        <Box w="100%">
+            <Heading size="md" fontFamily="mono" mb="6" textAlign={{base: "center", lg: "left"}}>
+                <Trans i18nKey="Contact.Message" />
+            </Heading>
 
-                {({handleSubmit, errors, touched}) => (
-                    <form onSubmit={handleSubmit}>
-                        <VStack spacing={4} alignItems={{base:"center"}} >
-                            <Flex>
-                                <Flex flexDirection={"column"}>
-                                    <FormControl>
-                                        <FormLabel htmlFor="email">
-                                            <Trans i18nKey="Contact.Email"/>
-                                        </FormLabel>
-                                        <Field
-                                            as={Input}
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            variant="filled"
-                                            w={400}
-                                            style={getStyles(errors,'email')}
-                                        />
-                                        { /*errors.email && touched.email ? <div>{errors.email}</div> : null */}
-                                    </FormControl>
+            <Card p={{base: 6, lg: 10}}>
+                <Formik
+                    initialValues={{
+                        email: "",
+                        firstName: "",
+                        lastName: "",
+                        message: "",
+                    }}
+                    validationSchema={SignupSchema}
+                    onSubmit={(values, {resetForm}) => {
+                        send(
+                            'service_mpdk7b4',
+                            'template_09omxjv',
+                            values,
+                            'dbF9XEig3xE9x2TuG'
+                        )
+                            .then(() => {
+                                toast({
+                                    title: t("Contact.SendSuccess"),
+                                    status: "success",
+                                    duration: 4000,
+                                    isClosable: true,
+                                });
+                                resetForm();
+                            })
+                            .catch(() => {
+                                toast({
+                                    title: t("Contact.SendError"),
+                                    status: "error",
+                                    duration: 4000,
+                                    isClosable: true,
+                                });
+                            });
+                    }}
+                >
+                    {({handleSubmit, errors}) => (
+                        <form onSubmit={handleSubmit}>
+                            <VStack spacing={4} align="stretch">
+                                <Flex gap={4} direction={{base: "column", lg: "row"}}>
                                     <FormControl>
                                         <FormLabel htmlFor="firstName">
                                             <Trans i18nKey="Contact.FirstName"/>
@@ -121,10 +92,8 @@ export default function ContactForm() {
                                             name="firstName"
                                             type="text"
                                             variant="filled"
-                                            w={400}
-                                            style={getStyles(errors,'firstName')}
+                                            style={getStyles(errors, 'firstName')}
                                         />
-                                        { /*errors.firstName && touched.firstName ? <div>{errors.firstName}</div> : null */}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel htmlFor="lastName">
@@ -136,41 +105,48 @@ export default function ContactForm() {
                                             name="lastName"
                                             type="text"
                                             variant="filled"
-                                            w={400}
-                                            style={getStyles(errors,'lastName')}
+                                            style={getStyles(errors, 'lastName')}
                                         />
-                                        { /*errors.lastName && touched.lastName ? <div>{errors.lastName}</div> : null */}
                                     </FormControl>
                                 </Flex>
+
+                                <FormControl>
+                                    <FormLabel htmlFor="email">
+                                        <Trans i18nKey="Contact.Email"/>
+                                    </FormLabel>
+                                    <Field
+                                        as={Input}
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        variant="filled"
+                                        style={getStyles(errors, 'email')}
+                                    />
+                                </FormControl>
+
                                 <FormControl>
                                     <FormLabel htmlFor="message">
                                         <Trans i18nKey="Contact.MailMessage"/>
                                     </FormLabel>
-                                    <Box paddingLeft={"10px"}>
-                                        <Field
-                                            as={Textarea}
-                                            id="message"
-                                            name="message"
-                                            type="text"
-                                            variant="filled"
-                                            style={getStyles(errors,'message')}
-                                            height={"10em"}
-                                            w={500}
-                                        />
-                                    </Box>
+                                    <Field
+                                        as={Textarea}
+                                        id="message"
+                                        name="message"
+                                        type="text"
+                                        variant="filled"
+                                        style={getStyles(errors, 'message')}
+                                        height={"10em"}
+                                    />
                                 </FormControl>
-                            </Flex>
 
-                            <Button type="submit" colorScheme="purple" width="full">
-                                <Trans i18nKey="Contact.Send"/>
-                            </Button>
-                        </VStack>
-                    </form>
-                )}
-            </Formik>
-            </Flex>
-            </Box>
-        </>
+                                <Button type="submit" colorScheme="purple" width="full">
+                                    <Trans i18nKey="Contact.Send"/>
+                                </Button>
+                            </VStack>
+                        </form>
+                    )}
+                </Formik>
+            </Card>
+        </Box>
     );
 }
-

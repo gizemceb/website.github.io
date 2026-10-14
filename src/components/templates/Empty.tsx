@@ -3,7 +3,6 @@ import React, {useEffect} from "react";
 import {useTranslation} from 'react-i18next';
 import { isCommonPage } from "../../utils/language";
 import { Header } from "../organisms/Header";
-import {Cookies} from "../organisms/Cookies";
 
 export function Empty(props: any) {
   const { t, i18n } = useTranslation();
@@ -24,8 +23,7 @@ export function Empty(props: any) {
       {
         !isCommonPage() && <Header />
       }
-      <Box marginTop={{ base: 0, lg: isCommonPage() ? '0' : "75px" }}>{props.children}</Box>
-      <Cookies />
+      <Box marginTop={{ base: isCommonPage() ? '0' : "64px", lg: isCommonPage() ? '0' : "75px" }}>{props.children}</Box>
     </Box>
   );
 }

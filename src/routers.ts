@@ -1,5 +1,5 @@
 import React from "react";
-import { urls } from "./utils/language";
+import { urlsTR, urlsEN } from "./utils/urls";
 
 const Homepage = React.lazy(() => import("./components/pages/HomePage"));
 const Projects = React.lazy(() =>
@@ -8,38 +8,23 @@ const Projects = React.lazy(() =>
 const Contact = React.lazy(() =>
   import("./components/pages/Contact")
 );
+const NotFound = React.lazy(() =>
+  import("./components/pages/NotFound")
+);
 
 export interface IRouteConfig {
   url: string;
   component: any;
-  protectedRoute?: boolean;
-  enabled?: boolean;
-  key?: string;
+  key: string;
 }
 
-export const routerDefinitions: { [key: string]: IRouteConfig } = {
-  Homepage: {
-    url: urls.Homepage,
-    component: Homepage,
-  },
-  Projects: {
-    url: urls.Projects,
-    component: Projects,
-  },
-  Contact: {
-    url: urls.Contact,
-    component: Contact,
-  },
-};
-
-const routes: IRouteConfig[] = Object.keys(routerDefinitions).map((k) => {
-  const route: IRouteConfig = routerDefinitions[k];
-  route.enabled = route.enabled !== undefined ? route.enabled : true;
-  route.protectedRoute = false;
-  if (route?.key || route?.url) {
-    route.key = route.key ? route.key : route.url.replace("/", "");
-  }
-  return route;
-});
-
-export { routes };
+// Both languages are registered side by side so switching language is a
+// client-side navigation to an already-known route, not a reload.
+export const routes: IRouteConfig[] = [
+  { key: "homepage", url: urlsTR.Homepage, component: Homepage },
+  { key: "tr-projects", url: urlsTR.Projects, component: Projects },
+  { key: "en-projects", url: urlsEN.Projects, component: Projects },
+  { key: "tr-contact", url: urlsTR.Contact, component: Contact },
+  { key: "en-contact", url: urlsEN.Contact, component: Contact },
+  { key: "not-found", url: "*", component: NotFound },
+];

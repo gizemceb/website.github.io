@@ -16,8 +16,8 @@ const BadgeItem: React.FC<IBadgeList> = ({data}) => {
     const renderBadges = () => {
         return data?.map((item) => {
             return (
-                <Box ml='3' margin="10px">
-                    <Link href={item.link}>
+                <Box key={item.link + item.header} textAlign="center" minW="100px">
+                    <Link href={item.link} isExternal>
                         <Image
                             display={"block"}
                             marginLeft={"auto"}
@@ -25,19 +25,19 @@ const BadgeItem: React.FC<IBadgeList> = ({data}) => {
                             borderRadius='full'
                             boxSize='50px'
                             src={item.picUrl}
-                            alt={item.link}
+                            alt={item.header}
                         />
                     </Link>
-                    <Text fontWeight='bold' align={"center"}>
+                    <Text fontWeight='bold' align={"center"} mt="2">
                         {item.header}
                     </Text>
-                    <Text fontSize='sm'>{item.text}</Text>
+                    <Text fontSize='sm' color="blackAlpha.700">{item.text}</Text>
                 </Box>
             )
         }) || null;
     }
     return (
-        <Flex  flexDirection={"column"} padding="30px">
+        <Flex flexWrap="wrap" justifyContent="center" gap="8" padding="10px">
             {renderBadges()}
         </Flex>
     );

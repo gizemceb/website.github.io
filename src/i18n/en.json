@@ -3,9 +3,9 @@
         "Title": "Gizem Çebi",
         "MetaData": {
             "Title": {
-                "/tr/login": "Helloooo",
-                "/tr/projects": "My projects",
-                "/tr/contact": "Contact - gizemcebi.com"
+                "/en/login": "Helloooo",
+                "/en/projects": "My projects",
+                "/en/contact": "Contact - gizemcebi.com"
             }
         },
         "Menu": {
@@ -15,6 +15,20 @@
         "HomePage": {
             "Information": "Hi, My name is Gizem and this website my very first published website. Little excited :)",
             "Summary": "I am a senior year computer engineering student and currently I am working as a backend engineer at a start-up company. I am learning Spanish in my leisure time and trying to improve my coding skills."
+        },
+        "Projects": {
+            "Title": "My Projects",
+            "ViewOnGithub": "View on GitHub",
+            "Items": {
+                "Website": {
+                    "Title": "Personal Website",
+                    "Description": "The very CV website you're looking at right now — a bilingual (TR/EN) personal site built with React, TypeScript and Chakra UI."
+                },
+                "PokemonGame": {
+                    "Title": "Pokemon Game",
+                    "Description": "A Pokémon-themed game written in JavaScript — my first step into game development."
+                }
+            }
         },
         "Contact": {
             "Title": "Contact",
@@ -26,10 +40,19 @@
             "MailMessage": "Message",
             "PositionTitle": "Software Engineer",
             "EmailAddress": "gizem.cebi@hotmail.com",
-            "Info": "My Contact Information:"
+            "Info": "My Contact Information:",
+            "SendSuccess": "Your message has been sent, thank you!",
+            "SendError": "Something went wrong, please try again."
+        },
+        "NotFound": {
+            "Title": "404",
+            "Message": "The page you're looking for doesn't exist.",
+            "BackHome": "Back to homepage"
         },
         "Cookies": {
-            "info": "Cookeies will added later. :/"
+            "Message": "This site uses Google Analytics to understand visitor statistics. Do you accept?",
+            "Accept": "Accept",
+            "Reject": "Reject"
         }
     }
 }

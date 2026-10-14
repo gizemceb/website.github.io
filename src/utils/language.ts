@@ -16,56 +16,46 @@ const checkLanguage = (val: string) => {
     return ['en', 'tr'].includes(val) ? val : 'en';
 };
 
-export const Language = {
-    change: (langParam: string) => {
-        try {
-            const lang = checkLanguage(langParam)
-            i18next.changeLanguage(lang);
-            localStorage.setItem(LANG_KEY, lang);
-
-            if (isCommonPage()) {
-                return;
-            }
-
-            const translatedPathName: any = Object.values(urlObj)
-                .reduce((acc, item: any) => {
-                    let result = acc;
-
-                    const index = Object.values(item).findIndex(value => value === window?.location?.pathname);
-
-                    if (index > -1 && lang in urlObj) {
-                        result = Object.values(urlObj[lang])[index];
-                    }
-
-                    console.log("result:", result);
-                    console.log("result lang:", lang);
-                    console.log("result urlObj:", urlObj);
-                    return result;
-                }, '/');
-
-            // eslint-disable-next-line no-restricted-globals
-            history.replaceState('', '', `${translatedPathName}${window?.location?.search}`);
-        } catch (err) {
-            console.log('err', err);
-            // eslint-disable-next-line no-restricted-globals
-            history.replaceState('', '', `/${window?.location?.search}`);
-        }
-    },
-    get: (): string => {
-        if (window.location.pathname !== "/" && !isCommonPage()) {
-            const langFromUrl = checkLanguage(window.location.pathname.split('/')[1]);
-
-            return langFromUrl;
-        }
-
-        const lang = checkLanguage(localStorage.getItem(LANG_KEY) as string);
-
-        if (!lang) {
-            return checkLanguage(window?.navigator?.language?.split("-")[0] || 'en');
-        }
-
-        return lang.toString();
-    }
+const getLangFromPath = (pathname: string): string | null => {
+    const segment = pathname.split('/')[1];
+    return segment === 'tr' || segment === 'en' ? segment : null;
 };
 
-export const urls = {...urlObj[Language.get()], ...urlsOut, ...urlsCommon};
+export const getLocalizedPath = (pathname: string, targetLang: string): string => {
+    const lang = checkLanguage(targetLang);
+    const index = Object.values(urlsTR).findIndex(value => value === pathname);
+    const foundIndex = index > -1 ? index : Object.values(urlsEN).findIndex(value => value === pathname);
+
+    if (foundIndex === -1) {
+        return urlObj[lang].Homepage;
+    }
+
+    return Object.values(urlObj[lang])[foundIndex] as string;
+};
+
+export const Language = {
+    getFromPath: getLangFromPath,
+    setLanguage: (lang: string) => {
+        const checked = checkLanguage(lang);
+        i18next.changeLanguage(checked);
+        localStorage.setItem(LANG_KEY, checked);
+    },
+    get: (): string => {
+        const fromPath = getLangFromPath(window?.location?.pathname || '');
+        if (fromPath) {
+            return fromPath;
+        }
+
+        const stored = localStorage.getItem(LANG_KEY);
+        if (stored) {
+            return checkLanguage(stored);
+        }
+
+        return checkLanguage(window?.navigator?.language?.split("-")[0] || 'en');
+    },
+};
+
+export const useLocalizedUrls = () => {
+    const lang = checkLanguage(i18next.language);
+    return {...urlObj[lang], ...urlsOut, ...urlsCommon};
+};
