@@ -1,18 +1,20 @@
 {
   "files": {
-    "main.js": "https://gizemcebi.com/static/js/main.82e603fa.js",
-    "static/js/747.bfc7c5f9.chunk.js": "https://gizemcebi.com/static/js/747.bfc7c5f9.chunk.js",
-    "static/js/97.76d48adb.chunk.js": "https://gizemcebi.com/static/js/97.76d48adb.chunk.js",
-    "static/js/216.a861e319.chunk.js": "https://gizemcebi.com/static/js/216.a861e319.chunk.js",
-    "static/js/548.7305efe3.chunk.js": "https://gizemcebi.com/static/js/548.7305efe3.chunk.js",
+    "main.js": "https://gizemcebi.com/static/js/main.3010d3a3.js",
+    "static/js/747.f75ce1b8.chunk.js": "https://gizemcebi.com/static/js/747.f75ce1b8.chunk.js",
+    "static/js/277.b863fb6c.chunk.js": "https://gizemcebi.com/static/js/277.b863fb6c.chunk.js",
+    "static/js/216.e55507a7.chunk.js": "https://gizemcebi.com/static/js/216.e55507a7.chunk.js",
+    "static/js/877.db590058.chunk.js": "https://gizemcebi.com/static/js/877.db590058.chunk.js",
+    "static/js/194.638d4a46.chunk.js": "https://gizemcebi.com/static/js/194.638d4a46.chunk.js",
     "index.html": "https://gizemcebi.com/index.html",
-    "main.82e603fa.js.map": "https://gizemcebi.com/static/js/main.82e603fa.js.map",
-    "747.bfc7c5f9.chunk.js.map": "https://gizemcebi.com/static/js/747.bfc7c5f9.chunk.js.map",
-    "97.76d48adb.chunk.js.map": "https://gizemcebi.com/static/js/97.76d48adb.chunk.js.map",
-    "216.a861e319.chunk.js.map": "https://gizemcebi.com/static/js/216.a861e319.chunk.js.map",
-    "548.7305efe3.chunk.js.map": "https://gizemcebi.com/static/js/548.7305efe3.chunk.js.map"
+    "main.3010d3a3.js.map": "https://gizemcebi.com/static/js/main.3010d3a3.js.map",
+    "747.f75ce1b8.chunk.js.map": "https://gizemcebi.com/static/js/747.f75ce1b8.chunk.js.map",
+    "277.b863fb6c.chunk.js.map": "https://gizemcebi.com/static/js/277.b863fb6c.chunk.js.map",
+    "216.e55507a7.chunk.js.map": "https://gizemcebi.com/static/js/216.e55507a7.chunk.js.map",
+    "877.db590058.chunk.js.map": "https://gizemcebi.com/static/js/877.db590058.chunk.js.map",
+    "194.638d4a46.chunk.js.map": "https://gizemcebi.com/static/js/194.638d4a46.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.82e603fa.js"
+    "static/js/main.3010d3a3.js"
   ]
 }
